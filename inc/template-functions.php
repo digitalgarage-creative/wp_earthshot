@@ -37,3 +37,15 @@ function earthshot_catalog_pingback_header() {
 }
 add_action( 'wp_head', 'earthshot_catalog_pingback_header' );
 
+
+// WPMP language switcher
+function icl_post_languages_link(){
+	$languages = icl_get_languages('skip_missing=1');
+	if(1 < count($languages)){
+	  echo __('');
+	  foreach($languages as $l){
+		if(!$l['active']) $langs[] = $l['url'];
+	  }
+	  echo join(' ', $langs);
+	}
+  }

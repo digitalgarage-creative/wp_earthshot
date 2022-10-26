@@ -11,7 +11,7 @@
 
 ?>
 <!doctype html>
-<html class="no-js" >
+<html class="no-js" <?php language_attributes(); ?>
 	<head>
 		<!-- Primary Meta Tags -->
 		<meta charset="utf-8">
@@ -24,9 +24,9 @@
 		
 		<!-- Place favicon.ico in the root directory -->
 		<link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_template_directory_uri(); ?>//favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_template_directory_uri(); ?>//favicon-16x16.png">
-		<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>//site.webmanifest">
+		<link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_template_directory_uri(); ?>/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_template_directory_uri(); ?>/favicon-16x16.png">
+		<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/site.webmanifest">
 
 
 		
@@ -38,7 +38,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PC9RRLK');</script>
 <!-- End Google Tag Manager -->
 
-		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/styles.min.css?v=1">
+		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/styles.min.css?v=1.1">
 		
 		<!-- Adobe typekit -->
 		<script>
@@ -54,7 +54,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Adobe typekit -->
 		<?php wp_head(); ?>
 	</head>
-	<body <?php body_class('ja'); ?>>
+	<?php if(ICL_LANGUAGE_CODE == 'ja'){?>
+ <body <?php body_class('ja'); ?>>
+<?php } elseif(ICL_LANGUAGE_CODE == 'en'){ ?>
+ <body <?php body_class('en-sans'); ?>>
+<?php } ?>
+	
 		<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PC9RRLK"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -71,66 +76,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-	        <li class="nav-item">
-          <a class="nav-link" href="#concept">Concept</a>
+	      <li class="nav-item ">
+          <a class="nav-link active " href="<?php echo esc_url( home_url( '/' ) ); ?>#concept">Concept</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#about">About</a>
+        <li class="nav-item ">
+          <a class="nav-link active " href="<?php echo esc_url( home_url( '/' ) ); ?>#about">About</a>
         </li>
-    
-        <li class="nav-item">
-          <a class="nav-link" href="#esg">ESG / SDG</a>
+        <li class="nav-item ">
+          <a class="nav-link active " href="<?php echo esc_url( home_url( '/' ) ); ?>#earthshot_tv">Earthshot TV</a>
         </li>
-      
-        <li class="nav-item dropdown">
-          <a class="nav-link " href="/earthshot-tv/" aria-expanded="false">
-            Earthshot TV
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="">
-            <li><a class="dropdown-item" href="/earthshot-tv/">Earthshot TV</a></li>
-            <li><a class="dropdown-item" href="/startups/">Startups</a></li>
-          </ul>
+        <li class="nav-item ">
+          <a class="nav-link active " href="<?php echo esc_url( home_url( '/' ) ); ?>#ecosystem">Ecosystem</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#ecosystem">Ecosystem</a>
+        <?php if(ICL_LANGUAGE_CODE == 'ja'){?>
+        
+        <li class="nav-item language-switcher">
+            <a class="nav-link " href="<?php icl_post_languages_link(); ?>"> EN</a>
         </li>
-       
+
+        <?php } elseif(ICL_LANGUAGE_CODE == 'en'){ ?>
+
+        <li class="nav-item language-switcher">
+            <a class="nav-link " href="<?php icl_post_languages_link(); ?>"> JA</a>
+        </li>
  
-
- <?php 
-// add "raw" key and save data to variable
-
-$langs_array = pll_the_languages( array( 'dropdown' => 1, 'hide_current' => 1, 'raw' => 1 ) );
-$currentlang = get_bloginfo('language');
-
-?>
- <!-- <li class="nav-item language-switcher">
-    <?php
-       
-        if($currentlang=="en-US"):
-    ?>
-      <a class="nav-link " href="/"> JA</a>
-    <?php elseif($currentlang=="ja"): ?>
-      <a class="nav-link " href="/en/"> EN</a>
-    <?php endif; ?>
- </li> -->
- <li class="nav-item language-switcher" style="text-transform: uppercase;">
-  <?php if ($langs_array) : ?>
-  <div class="drop-block lang">
-    <?php foreach ($langs_array as $lang) : ?>
-      <a  class="nav-link" href="<?php echo $lang['url']; ?>" class="drop-block__link">
-        <?php echo $lang['slug']; ?>
-        </a>
-    <?php endforeach; ?>
-  </div>
-<?php endif; ?>
-</li>
-
-
-
-
- 
-
+    <?php } ?>
       </ul>    
     </div> 
   		</div>
